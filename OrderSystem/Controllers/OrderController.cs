@@ -18,6 +18,8 @@ namespace OrderSystem.Controllers
             _context.Database.EnsureCreated();
         }
 
+        private static Cart cart = new Cart();
+
         // GET: OrderController
         public ActionResult Index()
         {
