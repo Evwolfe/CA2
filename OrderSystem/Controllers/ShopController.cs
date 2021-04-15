@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OrderSystem.Controllers
 {
-    public class ShopController : StockDetailsController
+    public class ShopController : Controller
     {
         private readonly CartContext _context;
 
@@ -26,7 +26,7 @@ namespace OrderSystem.Controllers
 
 
         // GET: OrderController
-        public ActionResult CartIndex()
+        public ActionResult Index()
         {
             ViewBag.TotalPrice = String.Format(cart.CalcTotal().ToString("C2"));
             return View(StockList);

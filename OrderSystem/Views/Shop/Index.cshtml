@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OrderSystem.Models.StockDetails>
+﻿@model IEnumerable<OrderSystem.Models.CartItems>
 
 @{
     ViewData["Title"] = "Shop";
@@ -38,3 +38,5 @@
 }
     </tbody>
 </table>
+
+<h2>Total Price @ViewBag.TotalPrice</h2>
