@@ -9,29 +9,34 @@ using System.Threading.Tasks;
 
 namespace OrderSystem.Controllers
 {
-    public class ItemController : StockDetailsController
+    public class ShopController : StockDetailsController
     {
         private readonly CartContext _context;
 
-        public ItemController()
+        public ShopController()
         {
             _context = new CartContext();
             _context.Database.EnsureCreated();
         }
 
+        private static List<CartItems> StockList = new List<CartItems>();
+        //foreach (Items i in Db.Stock)
+
         private static Cart cart = new Cart();
 
+
         // GET: OrderController
-        public ActionResult ItemsIndex()
+        public ActionResult CartIndex()
         {
-            ViewBag.TotalPrice = cart.CalcTotal();
-            return View(_context.Items);
+            ViewBag.TotalPrice = String.Format(cart.CalcTotal().ToString("C2"));
+            return View(StockList);
         }
 
         // GET: OrderController/Details/5
         public ActionResult Add(string code)
         {
-            Items itm = _context.Items.FirstOrDefault(x => x.Name == code);
+ 
+            Items itm = StockList.FirstOrDefault(x => x.Name == code);
             if (itm != null)
             {
                 cart.AddItem(itm);
