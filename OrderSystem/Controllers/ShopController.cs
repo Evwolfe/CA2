@@ -20,7 +20,7 @@ namespace OrderSystem.Controllers
         }
 
         private static List<CartItems> StockList = new List<CartItems>();
-        //foreach (Items i in Db.Stock)
+        
 
         private static Cart cart = new Cart();
 
@@ -31,6 +31,7 @@ namespace OrderSystem.Controllers
             ViewBag.TotalPrice = String.Format(cart.CalcTotal().ToString("C2"));
             return View(StockList);
         }
+        
 
         // GET: OrderController/Details/5
         public ActionResult Add(string code)

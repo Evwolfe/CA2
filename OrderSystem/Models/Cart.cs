@@ -19,15 +19,15 @@ namespace OrderSystem.Models
             CartItems found = order.FirstOrDefault(p => p.Name.ToUpperInvariant() == choice.Name.ToUpperInvariant());
             if (found != null)
             {
-                found.Qty++; 
+                found.Qty++;
             }
-            else 
+            else
             {
                 order.Add(new CartItems() { Name = choice.Name, Price = choice.Price, Qty = 1 });
             }
 
         }
-        
+
         public double CalcTotal()
         {
             return order.Sum(p => p.Price * p.Qty);
@@ -39,13 +39,13 @@ namespace OrderSystem.Models
             CartItems found = order.FirstOrDefault(p => p.Name.ToUpperInvariant() == choice.Name.ToUpperInvariant());
             if (found != null)
             {
-                found.Qty--; 
+                found.Qty--;
                 if (found.Qty <= 0)
                 {
                     order.Remove(found);
                 }
             }
-            else 
+            else
             {
                 ;
             }
