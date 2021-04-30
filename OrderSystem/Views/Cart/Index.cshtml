@@ -1,0 +1,55 @@
+﻿@model CA2_OrderSystem.Models.Cart
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<h1>Your Cart</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                Name
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Qty
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.items)
+        {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qty)
+            </td>
+            <td>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Total Price @ViewBag.TotalPrice</h2>
+<p>
+    <a asp-controller="Shop" asp-action="Index">Back to Shop</a>
+</p>
+
+<p>
+    <a asp-controller="Orders" asp-action="Create">Submit Order</a>
+</p>
+
+

@@ -1,4 +1,4 @@
-﻿@model OrderSystem.Models.OrderEntry
+﻿@model CA2_OrderSystem.Models.Orders
 
 @{
     ViewData["Title"] = "Details";
@@ -7,7 +7,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>OrderEntry</h4>
+    <h4>Orders</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -17,10 +17,10 @@
             @Html.DisplayFor(model => model.Address)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DeliveryID)
+            @Html.DisplayNameFor(model => model.Details)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DeliveryID)
+            @Html.DisplayFor(model => model.Details)
         </dd>
     </dl>
 </div>

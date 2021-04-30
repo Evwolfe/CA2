@@ -5,27 +5,28 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using OrderSystem.Models;
+using CA2_OrderSystem.Models;
 
-namespace OrderSystem.Controllers
+namespace CA2_OrderSystem.Controllers
 {
-    public class OrderEntriesController : Controller
+    public class StocksController : Controller
     {
-        private readonly OrderContext _context;
+        private readonly StockContext _context;
 
-        public OrderEntriesController()
+        public StocksController()
         {
-            _context = new OrderContext();
+            _context = new StockContext();
             _context.Database.EnsureCreated();
         }
 
-        // GET: OrderEntries
+        // GET: Stocks
         public async Task<IActionResult> Index()
         {
-            return View(await _context.OrderDetails.ToListAsync());
+            
+            return View(await _context.Stock.ToListAsync());
         }
 
-        // GET: OrderEntries/Details/5
+        // GET: Stocks/Details/5
         public async Task<IActionResult> Details(string id)
         {
             if (id == null)
@@ -33,39 +34,39 @@ namespace OrderSystem.Controllers
                 return NotFound();
             }
 
-            var orderEntry = await _context.OrderDetails
-                .FirstOrDefaultAsync(m => m.OrderID == id);
-            if (orderEntry == null)
+            var stock = await _context.Stock
+                .FirstOrDefaultAsync(m => m.ProdID == id);
+            if (stock == null)
             {
                 return NotFound();
             }
 
-            return View(orderEntry);
+            return View(stock);
         }
 
-        // GET: OrderEntries/Create
+        // GET: Stocks/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: OrderEntries/Create
+        // POST: Stocks/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OrderID,Address,DeliveryID")] OrderEntry orderEntry)
+        public async Task<IActionResult> Create([Bind("ProdID,Name,Qty,Price")] Stock stock)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(orderEntry);
+                _context.Add(stock);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(orderEntry);
+            return View(stock);
         }
 
-        // GET: OrderEntries/Edit/5
+        // GET: Stocks/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -73,22 +74,22 @@ namespace OrderSystem.Controllers
                 return NotFound();
             }
 
-            var orderEntry = await _context.OrderDetails.FindAsync(id);
-            if (orderEntry == null)
+            var stock = await _context.Stock.FindAsync(id);
+            if (stock == null)
             {
                 return NotFound();
             }
-            return View(orderEntry);
+            return View(stock);
         }
 
-        // POST: OrderEntries/Edit/5
+        // POST: Stocks/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("OrderID,Address,DeliveryID")] OrderEntry orderEntry)
+        public async Task<IActionResult> Edit(string id, [Bind("ProdID,Name,Qty,Price")] Stock stock)
         {
-            if (id != orderEntry.OrderID)
+            if (id != stock.ProdID)
             {
                 return NotFound();
             }
@@ -97,12 +98,12 @@ namespace OrderSystem.Controllers
             {
                 try
                 {
-                    _context.Update(orderEntry);
+                    _context.Update(stock);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OrderEntryExists(orderEntry.OrderID))
+                    if (!StockExists(stock.ProdID))
                     {
                         return NotFound();
                     }
@@ -113,10 +114,10 @@ namespace OrderSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(orderEntry);
+            return View(stock);
         }
 
-        // GET: OrderEntries/Delete/5
+        // GET: Stocks/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
@@ -124,30 +125,30 @@ namespace OrderSystem.Controllers
                 return NotFound();
             }
 
-            var orderEntry = await _context.OrderDetails
-                .FirstOrDefaultAsync(m => m.OrderID == id);
-            if (orderEntry == null)
+            var stock = await _context.Stock
+                .FirstOrDefaultAsync(m => m.ProdID == id);
+            if (stock == null)
             {
                 return NotFound();
             }
 
-            return View(orderEntry);
+            return View(stock);
         }
 
-        // POST: OrderEntries/Delete/5
+        // POST: Stocks/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            var orderEntry = await _context.OrderDetails.FindAsync(id);
-            _context.OrderDetails.Remove(orderEntry);
+            var stock = await _context.Stock.FindAsync(id);
+            _context.Stock.Remove(stock);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool OrderEntryExists(string id)
+        private bool StockExists(string id)
         {
-            return _context.OrderDetails.Any(e => e.OrderID == id);
+            return _context.Stock.Any(e => e.ProdID == id);
         }
     }
 }

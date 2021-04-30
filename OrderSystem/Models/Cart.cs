@@ -1,55 +1,72 @@
-﻿using System;
+﻿using CA2_OrderSystem.Controllers;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OrderSystem.Models
+namespace CA2_OrderSystem.Models
 {
     public class Cart
     {
-        private List<CartItems> order;
+        [Key]
+        public int CartID { get; set; }
 
+        public List<CartItems> items;
+        
         public Cart()
         {
-            order = new List<CartItems>();
+            items = new List<CartItems>();
         }
 
-        public void AddItem(Items choice)
+        public void AddItem(Stock choice)
         {
-            CartItems found = order.FirstOrDefault(p => p.Name.ToUpperInvariant() == choice.Name.ToUpperInvariant());
+            CartItems found = items.FirstOrDefault(p => p.ID.ToUpperInvariant() == choice.ProdID.ToUpperInvariant());
             if (found != null)
             {
                 found.Qty++;
             }
             else
             {
-                order.Add(new CartItems() { Name = choice.Name, Price = choice.Price, Qty = 1 });
+                items.Add(new CartItems() { ID = choice.ProdID, Name = choice.Name, Price = choice.Price, Qty = 1 });
             }
+           
+        }
 
+        public List<CartItems> ReturnCart()
+        {
+            return items;
         }
 
         public double CalcTotal()
         {
-            return order.Sum(p => p.Price * p.Qty);
+            return items.Sum(p => p.Price * p.Qty);
         }
 
-        //Test the below code
-        public void RemoveItem(Items choice)
+        public void RemoveItem(Stock choice)
         {
-            CartItems found = order.FirstOrDefault(p => p.Name.ToUpperInvariant() == choice.Name.ToUpperInvariant());
+
+            CartItems found = items.FirstOrDefault(p => p.ID == choice.ProdID);
             if (found != null)
             {
                 found.Qty--;
                 if (found.Qty <= 0)
                 {
-                    order.Remove(found);
+                    items.Remove(found);
                 }
             }
-            else
+            
+        }
+        
+        public void EditItems(CartItems choice)
+        {
+            CartItems found = items.FirstOrDefault(p => p.ID.ToUpperInvariant() == choice.ID.ToUpperInvariant());
+            if (found != null)
             {
-                ;
+                found.Qty = choice.Qty;
             }
 
         }
+
     }
 }

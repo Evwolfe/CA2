@@ -1,10 +1,10 @@
-﻿@model IEnumerable<OrderSystem.Models.OrderEntry>
+﻿@model IEnumerable<CA2_OrderSystem.Models.Orders>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Order List</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.Address)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DeliveryID)
+                @Html.DisplayNameFor(model => model.Details)
             </th>
             <th></th>
         </tr>
@@ -28,14 +28,15 @@
                 @Html.DisplayFor(modelItem => item.Address)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DeliveryID)
+                @Html.DisplayFor(modelItem => item.Details)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.OrderID">Edit</a> |
+                <a asp-action="Edit" asp-route-id="@item.OrderID">Change Address</a> |
                 <a asp-action="Details" asp-route-id="@item.OrderID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.OrderID">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.OrderID">Cancel Order</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
