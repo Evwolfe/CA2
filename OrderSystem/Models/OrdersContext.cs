@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OrderSystem.Models
+namespace CA2_OrderSystem.Models
 {
-    public class OrderContext : DbContext
+    public class OrdersContext : DbContext
     {
         private const string connectionString =
-            "Server=(localdb)\\mssqllocaldb;DataBase=OrderDetails;Trusted_Connection=False;";
+           "Server=(localdb)\\mssqllocaldb;DataBase=Orders1;Trusted_Connection=True;";
 
 
-        public DbSet<OrderEntry> OrderDetails { get; set; }
+        public DbSet<Orders> OrderDetails { get; set; }
 
         //The below tells the system to use the connection string we entered above - directing it to the db
         protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)

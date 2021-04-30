@@ -1,19 +1,20 @@
-﻿@model IEnumerable<OrderSystem.Models.StockDetails>
+﻿@model IEnumerable<CA2_OrderSystem.Models.Stock>
 
 @{
     ViewData["Title"] = "Shop";
 }
 
-<h1>Shop</h1>
+<h1>Shop Page</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Qty)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Price)
@@ -28,13 +29,21 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Qty)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.ActionLink("Add to Cart", "Add", new { code = item.Name }) |
-                @Html.ActionLink("Remove from Cart", "Edit", new { code = item.Name }) |
+                @Html.ActionLink("Add to Cart", "Add", new { code = item.ProdID }) |
+                @Html.ActionLink("Remove from Cart", "Edit", new { code = item.ProdID }) |
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+<h2>Total Price @ViewBag.TotalPrice</h2>
+<p>
+    <a asp-controller="Cart" asp-action="Index">Go to Cart</a>
+</p>

@@ -1,6 +1,6 @@
 using System;
 
-namespace OrderSystem.Models
+namespace CA2_OrderSystem.Models
 {
     public class ErrorViewModel
     {

@@ -5,14 +5,17 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OrderSystem.Models
+namespace CA2_OrderSystem.Models
 {
-    public class StockDetails
+    public class Stock
     {
         [Key]
-        public string ProductID { get; set; }
+        [DisplayName("Product ID: ")]
+        public string ProdID { get; set; }
         public string Name { get; set; }
+        [DisplayName("Quantity: ")]
         public int Qty { get; set; }
+        [DisplayName("Price (€): ")]
         public double Price { get; set; }
     }
 }
