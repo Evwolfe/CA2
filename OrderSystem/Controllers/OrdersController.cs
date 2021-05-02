@@ -95,6 +95,8 @@ namespace OrderSystem.Controllers
                 _context.Add(new Orders { OrderID = ordID, Address = orders.Address, Details = s2 });
 
                 await _context.SaveChangesAsync();
+                CartController.c1.EmptyCart();
+
                 return RedirectToAction(nameof(Index));
             }
             return View(orders);

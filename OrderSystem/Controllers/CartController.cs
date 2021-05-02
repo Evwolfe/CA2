@@ -22,12 +22,12 @@ namespace CA2_OrderSystem.Controllers
             _context = new StockContext();
             _context.Database.EnsureCreated();
         }
-
+        /*
         public Cart ReturnCart()
         {
             return c1;
         }
-
+        */
         // GET: CartController
         public ActionResult Index()
         {
