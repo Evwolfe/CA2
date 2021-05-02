@@ -37,6 +37,7 @@
                 @Html.DisplayFor(modelItem => item.Qty)
             </td>
             <td>
+                @Html.ActionLink("Remove from Cart", "Edit", new { code = item.ID }) 
             </td>
         </tr>
         }

@@ -30,6 +30,7 @@ namespace CA2_OrderSystem.Models
             {
                 items.Add(new CartItems() { ID = choice.ProdID, Name = choice.Name, Price = choice.Price, Qty = 1 });
             }
+            
            
         }
 

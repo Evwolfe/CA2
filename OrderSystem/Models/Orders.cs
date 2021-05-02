@@ -15,5 +15,6 @@ namespace CA2_OrderSystem.Models
         public string Address { get; set; }
         [DisplayName("Order Details: ")]
         public string Details { get; set; }
+
     }
 }

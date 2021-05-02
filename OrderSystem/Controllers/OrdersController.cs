@@ -60,11 +60,16 @@ namespace CA2_OrderSystem.Controllers
             {
                 //pulls in the list
                 //List<CartItems> bbs = cart.ReturnCart();
-                
+
+                List<string> s1 = new List<string>();
                 List<CartItems> c1 = CartController.c1.ReturnCart();
+                foreach (CartItems xx in c1)
+                {
+                    s1.Add(xx.Name);
+                }
+                string s2 = string.Join(", ", s1);
                 
-                
-                _context.Add(new Orders { OrderID = orders.OrderID, Address = orders.Address});
+                _context.Add(new Orders { OrderID = orders.OrderID, Address = orders.Address, Details = s2});
 
                 //_context.Add(orders);
                 await _context.SaveChangesAsync();

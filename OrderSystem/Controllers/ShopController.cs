@@ -59,7 +59,7 @@ namespace CA2_OrderSystem.Controllers
             if (itm != null)
             {
                 CartController.c1.AddItem(itm);
-                
+                //ReduceStock(itm);
             }
 
             
@@ -96,7 +96,8 @@ namespace CA2_OrderSystem.Controllers
             Stock itm = Shop.FirstOrDefault(i => i.ProdID.ToUpperInvariant() == code.ToUpperInvariant());
             if (itm != null)
             {
-                 CartController.c1.RemoveItem(itm);
+                CartController.c1.RemoveItem(itm);
+                //IncreaseStock(itm);
                  
             }
             
