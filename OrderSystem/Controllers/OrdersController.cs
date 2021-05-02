@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CA2_OrderSystem.Models;
 
-namespace CA2_OrderSystem.Controllers
+namespace OrderSystem.Controllers
 {
     public class OrdersController : Controller
     {
@@ -15,7 +15,7 @@ namespace CA2_OrderSystem.Controllers
 
         public OrdersController()
         {
-            _context = new OrdersContext();
+            _context = new OrdersContext(); 
             _context.Database.EnsureCreated();
         }
 
@@ -26,7 +26,7 @@ namespace CA2_OrderSystem.Controllers
         }
 
         // GET: Orders/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -34,7 +34,7 @@ namespace CA2_OrderSystem.Controllers
             }
 
             var orders = await _context.OrderDetails
-                .FirstOrDefaultAsync(m => m.OrderID == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (orders == null)
             {
                 return NotFound();
@@ -54,24 +54,11 @@ namespace CA2_OrderSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Orders orders)
+        public async Task<IActionResult> Create([Bind("ID,OrderID,Address,Details")] Orders orders)
         {
             if (ModelState.IsValid)
             {
-                //pulls in the list
-                //List<CartItems> bbs = cart.ReturnCart();
-
-                List<string> s1 = new List<string>();
-                List<CartItems> c1 = CartController.c1.ReturnCart();
-                foreach (CartItems xx in c1)
-                {
-                    s1.Add(xx.Name);
-                }
-                string s2 = string.Join(", ", s1);
-                
-                _context.Add(new Orders { OrderID = orders.OrderID, Address = orders.Address, Details = s2});
-
-                //_context.Add(orders);
+                _context.Add(orders);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -79,7 +66,7 @@ namespace CA2_OrderSystem.Controllers
         }
 
         // GET: Orders/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -99,9 +86,9 @@ namespace CA2_OrderSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("OrderID,Address,Details")] Orders orders)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,OrderID,Address,Details")] Orders orders)
         {
-            if (id != orders.OrderID)
+            if (id != orders.ID)
             {
                 return NotFound();
             }
@@ -115,7 +102,7 @@ namespace CA2_OrderSystem.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OrdersExists(orders.OrderID))
+                    if (!OrdersExists(orders.ID))
                     {
                         return NotFound();
                     }
@@ -130,7 +117,7 @@ namespace CA2_OrderSystem.Controllers
         }
 
         // GET: Orders/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -138,7 +125,7 @@ namespace CA2_OrderSystem.Controllers
             }
 
             var orders = await _context.OrderDetails
-                .FirstOrDefaultAsync(m => m.OrderID == id);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (orders == null)
             {
                 return NotFound();
@@ -150,7 +137,7 @@ namespace CA2_OrderSystem.Controllers
         // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var orders = await _context.OrderDetails.FindAsync(id);
             _context.OrderDetails.Remove(orders);
@@ -158,9 +145,9 @@ namespace CA2_OrderSystem.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool OrdersExists(string id)
+        private bool OrdersExists(int id)
         {
-            return _context.OrderDetails.Any(e => e.OrderID == id);
+            return _context.OrderDetails.Any(e => e.ID == id);
         }
     }
 }
