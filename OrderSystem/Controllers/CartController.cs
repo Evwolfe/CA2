@@ -22,12 +22,12 @@ namespace CA2_OrderSystem.Controllers
             _context = new StockContext();
             _context.Database.EnsureCreated();
         }
-
+        /*
         public Cart ReturnCart()
         {
             return c1;
         }
-
+        */
         // GET: CartController
         public ActionResult Index()
         {
@@ -65,12 +65,20 @@ namespace CA2_OrderSystem.Controllers
 
         // GET: CartController/Edit/5
 
-        public ActionResult Edit(CartItems code)
+        public async Task<IActionResult> Edit(string code)
         {
-            c1.EditItems(code);
-            return View();
-        }
+            var Shop = await _context.Stock.ToListAsync();
 
+            Stock itm = Shop.FirstOrDefault(i => i.ProdID.ToUpperInvariant() == code.ToUpperInvariant());
+            if (itm != null)
+            {
+                c1.RemoveItem(itm);
+                
+            }
+
+            return RedirectToAction("Index");
+        }
+        
         // POST: CartController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]

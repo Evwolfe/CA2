@@ -9,7 +9,7 @@ namespace CA2_OrderSystem.Models
     public class OrdersContext : DbContext
     {
         private const string connectionString =
-           "Server=(localdb)\\mssqllocaldb;DataBase=Orders1;Trusted_Connection=True;";
+           "Server=(localdb)\\mssqllocaldb;DataBase=Orders6;Trusted_Connection=True;";
 
 
         public DbSet<Orders> OrderDetails { get; set; }

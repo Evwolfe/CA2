@@ -30,12 +30,18 @@ namespace CA2_OrderSystem.Models
             {
                 items.Add(new CartItems() { ID = choice.ProdID, Name = choice.Name, Price = choice.Price, Qty = 1 });
             }
+            
            
         }
 
         public List<CartItems> ReturnCart()
         {
             return items;
+        }
+
+        public void EmptyCart()
+        {
+            items.Clear();
         }
 
         public double CalcTotal()
@@ -57,7 +63,7 @@ namespace CA2_OrderSystem.Models
             }
             
         }
-        
+        /*
         public void EditItems(CartItems choice)
         {
             CartItems found = items.FirstOrDefault(p => p.ID.ToUpperInvariant() == choice.ID.ToUpperInvariant());
@@ -66,7 +72,7 @@ namespace CA2_OrderSystem.Models
                 found.Qty = choice.Qty;
             }
 
-        }
+        }*/
 
     }
 }
