@@ -4,5 +4,41 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    
 </div>
+
+<div class="HomeStock">
+
+    <a href="@Url.Action("Index","Stocks")">
+        <img src="~/css/images/Stock_Image.jpg" alt="Home Image">
+    </a>
+    <a href="@Url.Action("Index","Stocks")">Stock List</a>
+    
+
+</div>
+
+<div class="HomeShop">
+
+    <a href="@Url.Action("Index","Shop")">
+        <img src="~/css/images/Shop_Image.png" alt="Shop Image">
+    </a>
+    <a href="@Url.Action("Index","Shop")">Shop</a>
+
+</div>
+
+<div class="HomeCart">
+
+    <a href="@Url.Action("Index","Cart")">
+        <img src="~/css/images/Cart_Image.jpg" alt="Cart Image" />
+    </a>
+    <a href="@Url.Action("Index","Cart")">Your Cart</a>
+</div>
+
+<div class="HomeOrder">
+
+    <a href="@Url.Action("Index","Orders")">
+        <img src="~/css/images/Orders_Image.png" alt="Order Image" />
+    </a>
+    <a href="@Url.Action("Index","Orders")">Current Orders</a>
+</div>
+

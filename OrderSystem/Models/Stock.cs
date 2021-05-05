@@ -10,12 +10,12 @@ namespace CA2_OrderSystem.Models
     public class Stock
     {
         [Key]
-        [DisplayName("Product ID: ")]
+        [DisplayName("Product ID")]
         public string ProdID { get; set; }
         public string Name { get; set; }
-        [DisplayName("Quantity: ")]
+        [DisplayName("Quantity")]
         public int Qty { get; set; }
-        [DisplayName("Price (€): ")]
+        [DisplayName("Price (€)")]
         public double Price { get; set; }
     }
 }
