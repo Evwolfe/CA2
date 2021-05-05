@@ -12,7 +12,7 @@ namespace CA2_OrderSystem.Models
         [Key]
         public string ID { get; set; }
         public string Name { get; set; }
-        [DisplayName("Price (€): ")]
+        [DisplayName("Price (€)")]
         public double Price { get; set; }
     }
 

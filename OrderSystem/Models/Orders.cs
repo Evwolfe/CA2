@@ -12,10 +12,10 @@ namespace CA2_OrderSystem.Models
         [Key]
         public int ID { get; set; }
 
-        [DisplayName("Order ID: ")]
+        [DisplayName("Order ID")]
         public int OrderID { get; set; }
         public string Address { get; set; }
-        [DisplayName("Order Details: ")]
+        [DisplayName("Order Details")]
         public string Details { get; set; }
 
     }
