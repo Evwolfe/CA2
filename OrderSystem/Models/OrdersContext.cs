@@ -14,7 +14,7 @@ namespace CA2_OrderSystem.Models
 
         public DbSet<Orders> OrderDetails { get; set; }
 
-        //The below tells the system to use the connection string we entered above - directing it to the db
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder)
         {
             optionBuilder.UseSqlServer(connectionString);

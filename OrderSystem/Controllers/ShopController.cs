@@ -59,7 +59,7 @@ namespace CA2_OrderSystem.Controllers
             if (itm != null)
             {
                 CartController.c1.AddItem(itm);
-                //ReduceStock(itm);
+                ReduceStock(itm);
             }
 
             
@@ -97,7 +97,7 @@ namespace CA2_OrderSystem.Controllers
             if (itm != null)
             {
                 CartController.c1.RemoveItem(itm);
-                //IncreaseStock(itm);
+                IncreaseStock(itm);
                  
             }
             
