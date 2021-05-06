@@ -24,14 +24,23 @@ namespace CA2_OrderSystem.Models
             CartItems found = items.FirstOrDefault(p => p.ID.ToUpperInvariant() == choice.ProdID.ToUpperInvariant());
             if (found != null)
             {
-                found.Qty++;
+                if(choice.Qty <= 0)
+                {
+                    ;
+                }
+                else
+                {
+                    found.Qty++;
+                }
+                
             }
             else
             {
                 items.Add(new CartItems() { ID = choice.ProdID, Name = choice.Name, Price = choice.Price, Qty = 1 });
             }
             
-           
+            //ShopController.c1.ReduceStock(choice);
+
         }
 
         public List<CartItems> ReturnCart()
@@ -51,18 +60,23 @@ namespace CA2_OrderSystem.Models
 
         public void RemoveItem(Stock choice)
         {
-
+            //var maxQty = enrty.Qty
             CartItems found = items.FirstOrDefault(p => p.ID == choice.ProdID);
             if (found != null)
             {
                 found.Qty--;
                 if (found.Qty <= 0)
                 {
+                    
                     items.Remove(found);
                 }
+                choice.Qty++;
             }
             
         }
+
+
+
         /*
         public void EditItems(CartItems choice)
         {

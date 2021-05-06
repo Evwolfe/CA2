@@ -24,7 +24,15 @@ namespace CA2_OrderSystem.Controllers
             var xy = _context.Stock.Find(enrty.ProdID);
             if(xy != null)
             {
-                xy.Qty --;
+               
+                if (xy.Qty <= 0)
+                {
+                    RedirectToAction("Index");
+                }
+                else
+                {
+                    xy.Qty--;
+                }
 
                 _context.SaveChanges();
             }
@@ -32,13 +40,17 @@ namespace CA2_OrderSystem.Controllers
 
         public void IncreaseStock(Stock enrty)
         {
+            var maxQty = enrty.Qty;
             var xy = _context.Stock.Find(enrty.ProdID);
-            if (xy != null)
+            if (xy.Qty == maxQty)
+            {
+                RedirectToAction("Index");
+            }
+            else
             {
                 xy.Qty++;
-
-                _context.SaveChanges();
             }
+            _context.SaveChanges();
         }
 
 
@@ -92,7 +104,7 @@ namespace CA2_OrderSystem.Controllers
         public async Task<IActionResult> Edit(string code)
         {
             var Shop = await _context.Stock.ToListAsync();
-
+            
             Stock itm = Shop.FirstOrDefault(i => i.ProdID.ToUpperInvariant() == code.ToUpperInvariant());
             if (itm != null)
             {
